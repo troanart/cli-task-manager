@@ -1,0 +1,25 @@
+# Бинарники
+server/taskManager
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# База данных
+server/task.db
+*.db
+
+# Go
+*.test
+*.out
+vendor/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
