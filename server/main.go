@@ -28,6 +28,7 @@ func main() {
 		fmt.Println("  go run . list")
 		fmt.Println("  go run . add \"заголовок\" \"описание\"")
 		fmt.Println("  go run . delete 3")
+		fmt.Println("  go run . edit 3 \"заголовок\" \"описание\"")
 		return
 	}
 
@@ -74,6 +75,25 @@ func main() {
 			log.Fatal("ошибка удаления:", err)
 		}
 		fmt.Println("задача удалена")
+
+	case "edit":
+		if len(os.Args) < 5 {
+			fmt.Println("нужно: go run . edit \"id\" \"title\" \"content\"")
+		}
+
+		id, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			log.Fatal("id должен быть числом ", err)
+		}
+
+		title := os.Args[3]
+		content := os.Args[4]
+
+		err = editTask(db, id, title, content)
+		if err != nil {
+			log.Fatal("ошибка изменения", err)
+		}
+		fmt.Println("задача успешно изменена")
 
 	default:
 		fmt.Println("Неизвестная команда:", os.Args[1])

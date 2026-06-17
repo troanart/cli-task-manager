@@ -73,3 +73,19 @@ func deleteTask(db *sql.DB, id int) error {
 
 	return nil
 }
+
+func editTask(db *sql.DB, id int, title, content string) error {
+	statement, err := db.Prepare("UPDATE tasks SET title = ? , content = ? WHERE id = ?")
+	if err != nil {
+		return err
+	}
+
+	defer statement.Close()
+
+	_, err = statement.Exec(title, content, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
